@@ -27,12 +27,22 @@ let undoStack = [];
 
 let isErasing = false;
 
-resizeCanvas();
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+let width = window.innerWidth * 0.6;
+let height = window.innerHeight * 0.5;
+
+if (isMobile) {
+    width = window.innerWidth * 0.8;
+    height = window.innerHeight * 0.5;
+}
+canvas.width = width;
+canvas.height = height;
+
 function resizeCanvas() {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    let width = window.innerWidth * 0.7;
-    let height = window.innerHeight * 0.6;
-
+    let width = window.innerWidth * 0.6;
+    let height = window.innerHeight * 0.5;
+    
     if (isMobile) {
         width = window.innerWidth * 0.8;
         height = window.innerHeight * 0.5;
@@ -125,5 +135,5 @@ function handleKeyDown(e) {
 }
 
 function undo() {
-   
+
 }
