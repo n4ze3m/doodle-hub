@@ -1,4 +1,5 @@
 import os
+import time
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -6,6 +7,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
 from uvicorn import run
 import mimetypes
+from routes.v1 import auth
 
 
 mimetypes.init()
@@ -33,8 +35,14 @@ app.add_middleware(
 
 @app.get("/", response_class=HTMLResponse)
 async def index_page(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse("draw.html", {"request": request})
 
+@app.get("/login", response_class=HTMLResponse)
+async def index_page(request: Request):
+    return templates.TemplateResponse("login.html", {"request": request})
+
+
+app.include_router(auth.router)
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))

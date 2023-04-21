@@ -1,25 +1,21 @@
 {% extends "base.html" %} {% block title %}Draw{% endblock %} {% block body %}
-<div class="flex  w-full items-center sm:flex-row flex-col">
+<div class="flex w-full items-center sm:flex-row flex-col my-3">
   <div
     class="relative flex flex-col w-full h-full z-10 flex-1 min-w-0 items-center shrink-0"
   >
-  <div 
-  
-  >
-  <div class="px-4 py-5 sm:px-6">
-    <h3 class="text-lg font-bold leading-6 text-gray-900">
-      Jake Wilson
-    </h3>
-    <p class="mt-1 max-w-2xl text-sm text-gray-500">
-     Draw something for me and send it to me anonymously.
-    </p>
-  </div>
-</div>
+    <div>
+      <div class="px-4 py-5 sm:px-6">
+        <h3 class="text-lg font-bold leading-6 text-gray-900">Jake Wilson</h3>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">
+          Draw something for me and send it to me anonymously.
+        </p>
+      </div>
+    </div>
     <div
       id="top-tools"
       class="flex mb-0 mt-2 items-center justify-center w-full"
     >
-    {% include "include/draw/tools.html" %}
+      {% include "include/draw/tools.html" %}
     </div>
     <div class="flex mb-0 mt-4 items-center justify-center w-full">
       <div class="overflow-hidden rounded-lg shadow-md bg-white items-center">
@@ -32,9 +28,13 @@
         type="button"
         class="inline-flex w-full justify-center text-lg items-center text-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
       >
-       send 
+        send
       </button>
     </div>
+    <span class="text-gray-500 text-xs mt-2">
+      100% anonymous and free
+    </span>
+
   </div>
   {% endblock %} {% block scripts %}
   <script
