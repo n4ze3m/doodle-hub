@@ -4,11 +4,12 @@
       <a href="/" class="-m-1.5 p-1.5">
         <span class="sr-only">Your Company</span>
         <img
-          class="h-8"
+          class="h-12"
           src="{{ url_for('static', path='/assets/logo.png') }}"
           alt=""
         />
       </a>
     </div>
+    {% if isLogin %} {% include 'include/profile.html' %} {% endif %}
   </nav>
 </div>

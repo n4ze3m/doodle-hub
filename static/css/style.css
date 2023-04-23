@@ -3,3 +3,8 @@ canvas {
     cursor: crosshair;
 
 }
+
+.show-dropdown {
+    display: block;
+  }
+  

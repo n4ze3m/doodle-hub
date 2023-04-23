@@ -15,4 +15,15 @@ class SupaDB:
             'redirect_to': 'http://localhost:5000/v1/auth/google/callback'
             }
         })
+    
+
+    def get_user(self, access_token):
+        try:
+            return self.supabase.auth.get_user(access_token)
+        except:
+            return None
+        
+
+    def get_user_info(self, id):
+        return self.supabase.from_("User").select("*").eq("id", id).execute()
 
