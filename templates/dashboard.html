@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block title %}Dashboard{% endblock %} {% block body
+{% extends "base.html" %} {% block title %}Dashboard{% endblock %}{% block body
 %}
 
 <div class="py-10">
@@ -56,13 +56,52 @@
           <div class="w-full border-t border-gray-300"></div>
         </div>
         <div class="relative flex justify-start">
-          <span class="bg-gray-50 pr-2 text-sm text-gray-500">
+          <span
+            style="font-family: 'Caveat', cursive"
+            class="bg-gray-50 pr-2 text-lg text-gray-500"
+          >
             Recieved Doodles
           </span>
         </div>
       </div>
+      {% if user['other'].Submissions|length == 0 %} {% include
+      "include/empty.html" %} {% else %}
+      <div class="grid m-2 lg:grid-cols-3 md:grid-cols-2 md:gap-4">
+        {% for submission in user['other'].Submissions %}
+        <div class="mx-w-sm m-2 rounded overflow-hidden shadow-lg bg-white">
+          <img src="{{submission.img}}" alt="" className="w-full h-48" />
+          <div class="flex gap-4 p-6 h-auto">
+            <div class="flex flex-1">
+              <button
+                type="button"
+                id="submission-share-btn"
+                x-data="{{submission.img}}"
+                onclick="shareImage(this)"
+                class="flex w-full justify-center rounded-md border border-transparent bg-gray-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+              >
+                Share
+              </button>
+            </div>
+
+            <div class="flex flex-1">
+              <button
+                id="submission-download-btn"
+                x-data="{{submission.img}}"
+                onclick="downloadImage(this)"
+                class="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              >
+                Download
+              </button>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
     </div>
   </main>
 </div>
 
+{% endblock %} {% block scripts %}
+<script src="{{ url_for('static', path='/js/dashboard.js') }}"></script>
 {% endblock %}

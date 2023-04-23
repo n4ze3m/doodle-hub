@@ -15,6 +15,8 @@
 
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Caveat&display=swap");
+
       html,
       body {
         font-family: "Poppins", sans-serif !important;
@@ -31,7 +33,7 @@
         <pattern
           id="0787a7c5-978c-4f66-83c7-11c213f99cb7"
           width="200"
-          height="200" 
+          height="200"
           x="50%"
           y="-1"
           patternUnits="userSpaceOnUse"
@@ -48,17 +50,8 @@
     </svg>
 
     {% include 'include/nav.html' %} {% block body %}{% endblock %} {% block
-    scripts %} 
-    {% endblock %}
-    <script
-    src="{{ url_for('static', path='/js/other.js') }}"
-  ></script>
-    <script
-    src="{{ url_for('static', path='/js/auth.js') }}"
-  ></script>
-
-  <script
-  src="{{ url_for('static', path='/js/dropdown.js') }}"
-></script>
+    scripts %} {% endblock %}
+    <script src="{{ url_for('static', path='/js/auth.js') }}"></script>
+    <script src="{{ url_for('static', path='/js/dropdown.js') }}"></script>
   </body>
 </html>

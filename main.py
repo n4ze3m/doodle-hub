@@ -36,7 +36,9 @@ app.add_middleware(
     allow_headers=headers
 )
 
-
+@app.get("/", response_class=HTMLResponse)
+async def index_page(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request, "isLogin": False})
 
 @app.get("/login", response_class=HTMLResponse)
 async def index_page(request: Request):
@@ -58,6 +60,7 @@ async def dashboard_page(request: Request):
     user = user.user.user_metadata
     other_user_info = supabase.get_user_info(user_id)
     other_user_info = other_user_info.data[0]
+
     user["other"] = other_user_info
 
     return templates.TemplateResponse("dashboard.html", {"request": request, "user": user, "isLogin": True})

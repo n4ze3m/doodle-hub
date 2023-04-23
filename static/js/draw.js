@@ -18,7 +18,9 @@ sendBtn.addEventListener('click', async () => {
         return;
     }
 
-
+    // disbale btn and show loading
+    sendBtn.disabled = true;
+    sendBtn.innerText = "Loading...";
     let destinationCanvas = document.createElement('canvas');
     destinationCanvas.width = canvas.width;
     destinationCanvas.height = canvas.height;
@@ -35,7 +37,7 @@ sendBtn.addEventListener('click', async () => {
 
     const url = `/api/v1${pathName}`;
 
-    const response = await fetch(url, {
+   await fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -43,8 +45,7 @@ sendBtn.addEventListener('click', async () => {
         body: JSON.stringify({ img: data }),
     });
 
-    const dataJson = await response.json();
-    console.log(dataJson);
+    window.location.href = "/congrats";
 });
 
 rangeValue.innerText = `${range.value} px`;

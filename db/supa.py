@@ -27,7 +27,7 @@ class SupaDB:
         
 
     def get_user_info(self, id):
-        return self.supabase.from_("User").select("*").eq("id", id).execute()
+        return self.supabase.from_("User").select("*, Submissions(*)").eq("id", id).execute()
     
 
 
