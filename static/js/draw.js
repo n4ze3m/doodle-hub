@@ -7,18 +7,44 @@ const range = document.getElementById('range');
 const rangeValue = document.getElementById('range-value');
 const colorPickerPreview = document.getElementById('color-picker-preview');
 
+ctx.fillStyle = "#ffffff";
+ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 const sendBtn = document.getElementById('send-btn');
 
-console.log("sendBtn", sendBtn)
-sendBtn.addEventListener('click', () => {
+sendBtn.addEventListener('click', async () => {
     if (undoStack.length === 0) {
         alert('Please draw something first!');
         return;
     }
-    const data = canvas.toDataURL();
-    console.log(data);
-    
+
+
+    let destinationCanvas = document.createElement('canvas');
+    destinationCanvas.width = canvas.width;
+    destinationCanvas.height = canvas.height;
+
+    let destinationCtx = destinationCanvas.getContext('2d');
+    destinationCtx.fillStyle = "#ffffff";
+    destinationCtx.fillRect(0, 0, canvas.width, canvas.height);
+
+    destinationCtx.drawImage(canvas, 0, 0);
+
+    const data = destinationCanvas.toDataURL();
+
+    const pathName = window.location.pathname.replace("draw", "doodle")
+
+    const url = `/api/v1${pathName}`;
+
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ img: data }),
+    });
+
+    const dataJson = await response.json();
+    console.log(dataJson);
 });
 
 rangeValue.innerText = `${range.value} px`;
@@ -56,7 +82,7 @@ function resizeCanvas() {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     let width = window.innerWidth * 0.6;
     let height = window.innerHeight * 0.5;
-    
+
     if (isMobile) {
         width = window.innerWidth * 0.8;
         height = window.innerHeight * 0.5;
