@@ -10,7 +10,7 @@
             <div class="md:col-span-1">
               <p class="mt-1 text-lg text-gray-500">
                 Share your link to get secret drawings from your friends and
-                family 🤗.
+                family 🤗
               </p>
             </div>
             <div class="grid grid-cols-2 gap-6">
@@ -18,15 +18,16 @@
                 <div class="mt-1 flex rounded-md">
                   <input
                     type="text"
-                    name="company-website"
+                    id="share-url"
+                    name="share-url"
                     value="{{ request.base_url }}draw/{{user['other'].public_id}}"
                     readonly
-                    id="company-website"
+                    id="share-url"
                     class="block w-full flex-1 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    placeholder="www.example.com"
                   />
                   <button
                     type="button"
+                    id="cpy-btn"
                     class="inline-flex items-center px-3 py-2 border ml-3 border-gray-300 text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:z-10 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   >
                     <svg
@@ -50,6 +51,17 @@
           </div>
         </div>
       </div>
+      <div class="relative mt-6">
+        <div class="absolute inset-0 flex items-center" aria-hidden="true">
+          <div class="w-full border-t border-gray-300"></div>
+        </div>
+        <div class="relative flex justify-start">
+          <span class="bg-gray-50 pr-2 text-sm text-gray-500">
+            Recieved Doodles
+          </span>
+        </div>
+      </div>
+      
     </div>
   </main>
 </div>

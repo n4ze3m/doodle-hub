@@ -8,7 +8,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
 from uvicorn import run
 import mimetypes
-from routes.v1 import auth
+from routes.v1 import auth, doodle
 from db.supa import SupaDB
 
 
@@ -37,9 +37,6 @@ app.add_middleware(
 )
 
 
-@app.get("/", response_class=HTMLResponse)
-async def index_page(request: Request):
-    return templates.TemplateResponse("draw.html", {"request": request, "isLogin": False})
 
 @app.get("/login", response_class=HTMLResponse)
 async def index_page(request: Request):
@@ -65,7 +62,13 @@ async def dashboard_page(request: Request):
 
     return templates.TemplateResponse("dashboard.html", {"request": request, "user": user, "isLogin": True})
 
+
+@app.get("/draw/{id}", response_class=HTMLResponse)
+async def index_page(request: Request, id: str):
+    return templates.TemplateResponse("draw.html", {"request": request, "isLogin": False})
+
 app.include_router(auth.router)
+app.include_router(doodle.router)
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))

@@ -7,6 +7,20 @@ const range = document.getElementById('range');
 const rangeValue = document.getElementById('range-value');
 const colorPickerPreview = document.getElementById('color-picker-preview');
 
+
+const sendBtn = document.getElementById('send-btn');
+
+console.log("sendBtn", sendBtn)
+sendBtn.addEventListener('click', () => {
+    if (undoStack.length === 0) {
+        alert('Please draw something first!');
+        return;
+    }
+    const data = canvas.toDataURL();
+    console.log(data);
+    
+});
+
 rangeValue.innerText = `${range.value} px`;
 colorPickerPreview.style.backgroundColor = colorPicker.value;
 
