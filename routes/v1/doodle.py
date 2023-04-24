@@ -3,10 +3,13 @@ from fastapi import APIRouter, HTTPException, Header, Request
 from fastapi.responses import RedirectResponse, HTMLResponse
 from pydantic import BaseModel
 import os
+from notifiy import CourierNotification
 
 class Doodle(BaseModel):
     img: str
+
 supabase = SupaDB()
+courier = CourierNotification()
 
 router = APIRouter(prefix="/api/v1")
 
@@ -42,8 +45,15 @@ async def doodle(request: Request, doodle_id: str, body: Doodle):
         status_code = 404
         return  HTTPException(status_code=status_code, detail="Not found")
     
-    user_id = data[0]["id"]
+    user = data[0]
+    user_id = user["id"]
+    user_name = user["raw_user_meta_data"]["name"]
     img_url = supabase.save_submissions(body.img, user_id)
+
+
+    if user["email_notification"]:
+        courier.send_notification(username=user_name, email=user["email"], img=img_url)
+        
 
     
     return {
