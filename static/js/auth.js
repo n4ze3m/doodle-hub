@@ -19,6 +19,15 @@ if (hash.includes("#access_token=")) {
         new Date().getTime() + expiresIn * 1000
     ).toUTCString()}`;
 
-    window.history.replaceState(null, null, window.location.pathname);
+    // window.history.replaceState(null, null, window.location.pathname);
+    window.location.href = "/dashboard";
     console.log("Access token saved to cookie");
+}
+
+const currentPath = window.location.pathname;
+
+if (currentPath === "/") {
+    if (document.cookie.includes("supabase_access_token")) {
+        window.location.href = "/dashboard";
+    }
 }
