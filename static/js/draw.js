@@ -85,7 +85,7 @@ let height = window.innerHeight * 0.5;
 
 if (isMobile) {
     width = window.innerWidth * 0.8;
-    height = window.innerHeight * 0.5;
+    height = window.innerHeight * 0.6;
 }
 canvas.width = width;
 canvas.height = height;
