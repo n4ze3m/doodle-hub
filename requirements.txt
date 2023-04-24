@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+image
+requests
+supabase
+pydantic
+trycourier
+jinja2

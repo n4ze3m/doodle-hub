@@ -1,0 +1,43 @@
+name: Cooking Doodle
+
+on:
+  push:
+    branches: [ chain ]
+env:
+  IMAGE_NAME: n4z3m/doodle-hub
+  IMAGE_TAG: latest
+  
+jobs:
+  push_to_docker_hub:
+    name: Push Docker image to Docker Hub
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build Docker image
+        run: |
+          docker build -t $IMAGE_NAME:$IMAGE_TAG .
+        working-directory: .
+      - name: Push Docker image
+        run: |
+          docker push $IMAGE_NAME:$IMAGE_TAG
+
+
+  deploy:
+    name: Restart Docker container
+    needs: [push_to_docker_hub]
+    runs-on: self-hosted
+    steps:
+      - name: Restart docker-compose
+        uses: actions/checkout@v2
+      - run: |
+          cd ~
+          cd server/
+          docker compose stop
+          docker compose pull zwag
+          docker compose up -d zwag
