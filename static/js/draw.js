@@ -103,7 +103,7 @@ function resizeCanvas() {
     canvas.height = height;
 }
 
-window.addEventListener('resize', resizeCanvas);
+// window.addEventListener('resize', resizeCanvas);
 
 canvas.addEventListener('mousedown', startDrawing);
 canvas.addEventListener('touchstart', startDrawing);

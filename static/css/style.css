@@ -5,7 +5,3 @@ canvas {
 .show-dropdown {
   display: block;
 }
-
-#drawing-board {
-  position: fixed;
-}
