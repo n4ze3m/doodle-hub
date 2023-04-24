@@ -1,0 +1,9 @@
+version: '3.9'
+services:
+  zwag:
+    image: n4z3m/doodle-hub:latest
+    ports:
+      - '3334:5000'
+    restart: always
+    env_file:
+      - .env
