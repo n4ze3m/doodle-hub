@@ -1,10 +1,11 @@
-
 canvas {
-    cursor: crosshair;
-
+  cursor: crosshair;
 }
 
 .show-dropdown {
-    display: block;
-  }
-  
+  display: block;
+}
+
+#drawing-board {
+  position: fixed;
+}

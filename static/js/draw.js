@@ -115,7 +115,6 @@ canvas.addEventListener('mouseup', stopDrawing);
 canvas.addEventListener('mouseleave', stopDrawing);
 canvas.addEventListener('touchend', stopDrawing);
 
-document.addEventListener('keydown', handleKeyDown);
 
 const colorBrushBtn = document.getElementById('color-brush');
 const eraserBtn = document.getElementById('eraser');
@@ -179,13 +178,3 @@ function setPosition(e) {
     }
 }
 
-function handleKeyDown(e) {
-    if (e.ctrlKey && e.key === 'z') {
-        e.preventDefault();
-        undo();
-    }
-}
-
-function undo() {
-
-}
