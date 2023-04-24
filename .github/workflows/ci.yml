@@ -2,7 +2,7 @@ name: Cooking Doodle
 
 on:
   push:
-    branches: [ chain ]
+    branches: [ main ]
 env:
   IMAGE_NAME: n4z3m/doodle-hub
   IMAGE_TAG: latest
