@@ -7,6 +7,11 @@ const range = document.getElementById('range');
 const rangeValue = document.getElementById('range-value');
 const colorPickerPreview = document.getElementById('color-picker-preview');
 
+
+const mainBoard = document.getElementById('draw-board');
+const congrats = document.getElementById('congrats');
+const congratsImg = document.getElementById('congrats-img');
+const jsConfetti = new JSConfetti();
 ctx.fillStyle = "#ffffff";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -37,7 +42,7 @@ sendBtn.addEventListener('click', async () => {
 
     const url = `/api/v1${pathName}`;
 
-   await fetch(url, {
+   const response = await fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -45,7 +50,13 @@ sendBtn.addEventListener('click', async () => {
         body: JSON.stringify({ img: data }),
     });
 
-    window.location.href = "/congrats";
+    const result = await response.json();
+    const img_url = result.img_url;
+    congratsImg.src = img_url;
+    mainBoard.classList.add('hidden');
+    congrats.classList.remove('hidden');
+    jsConfetti.addConfetti();
+    sendBtn.disabled = false;
 });
 
 rangeValue.innerText = `${range.value} px`;

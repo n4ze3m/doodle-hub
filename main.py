@@ -68,7 +68,16 @@ async def dashboard_page(request: Request):
 
 @app.get("/draw/{id}", response_class=HTMLResponse)
 async def index_page(request: Request, id: str):
-    return templates.TemplateResponse("draw.html", {"request": request, "isLogin": False})
+    user = supabase.find_user_by_public_id(id)
+    if user is None:
+        return RedirectResponse(url="/")
+    
+    user = user.data[0]["raw_user_meta_data"]
+    user = {
+        "name": user["name"],
+        "picture": user["picture"],
+    }
+    return templates.TemplateResponse("draw.html", {"request": request, "isLogin": False, "user": user})
 
 app.include_router(auth.router)
 app.include_router(doodle.router)

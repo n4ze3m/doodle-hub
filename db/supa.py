@@ -36,7 +36,8 @@ class SupaDB:
             return self.supabase.from_("User").select("*").eq("public_id", public_id).execute()
         except:
             return None
-    
+        
+
 
     def save_submissions(self, base64Img:str, user_id: str):
         base64Img = base64Img.replace("data:image/png;base64,", "")
@@ -50,9 +51,11 @@ class SupaDB:
         })
 
         url = f"{self.supabase_url}/storage/v1/object/public/images/{file_name}"
-        return self.supabase.from_("Submissions").insert(
+        self.supabase.from_("Submissions").insert(
             {"user_id": user_id, "img": url}
         ).execute()
+
+        return url
 
 
 

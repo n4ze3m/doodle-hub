@@ -1,11 +1,13 @@
 {% extends "base.html" %} {% block title %}Draw{% endblock %} {% block body %}
-<div class="flex w-full items-center sm:flex-row flex-col my-3">
+<div id="draw-board" class="flex w-full items-center sm:flex-row flex-col my-3">
   <div
     class="relative flex flex-col w-full h-full z-10 flex-1 min-w-0 items-center shrink-0"
   >
     <div>
       <div class="px-4 py-5 sm:px-6">
-        <h3 class="text-lg font-bold leading-6 text-gray-900">Jake Wilson</h3>
+        <h3 class="text-lg font-bold leading-6 text-gray-900">
+          {{ user['name'] }}
+        </h3>
         <p class="mt-1 max-w-2xl text-sm text-gray-500">
           Draw something for me and send it to me anonymously.
         </p>
@@ -34,10 +36,51 @@
     </div>
     <span class="text-gray-500 text-xs mt-2"> 100% anonymous and free </span>
   </div>
-  {% endblock %} {% block scripts %}
-  <script
-    type="module"
-    src="{{ url_for('static', path='/js/draw.js') }}"
-  ></script>
-  {% endblock %}
 </div>
+
+<div id="congrats" class="py-10 hidden">
+  <main>
+    <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <!-- Replace with your content -->
+      <div class="px-4 py-8 sm:px-0">
+        <div class="mb-6 text-center">
+          <h1 class="text-xl font-bold text-gray-900">
+            You have successfully sent your secret doodle to {{ user['name'] }}
+          </h1>
+        </div>
+        <div class="mb-3 text-center">
+          <img
+            class="mx-auto h-64 w-auto shadow-lg rounded"
+            id="congrats-img"
+            src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"
+          />
+        </div>
+
+        <div class="mb-3 text-center">
+          <p class="text-gray-500">
+            It's time to create your own doodle link and share it with your
+            friends
+          </p>
+        </div>
+
+        <div class="text-center">
+          <a
+            href="/api/v1/auth"
+            class="inline-flex justify-center text-lg items-center text-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          >
+            Create your doodle link
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+{% endblock %} {% block scripts %}
+
+<script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+<script
+  type="module"
+  src="{{ url_for('static', path='/js/draw.js') }}"
+></script>
+{% endblock %}

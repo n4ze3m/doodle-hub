@@ -43,9 +43,10 @@ async def doodle(request: Request, doodle_id: str, body: Doodle):
         return  HTTPException(status_code=status_code, detail="Not found")
     
     user_id = data[0]["id"]
-    supabase.save_submissions(body.img, user_id)
+    img_url = supabase.save_submissions(body.img, user_id)
 
     
     return {
-        "status": "ok"
+        "status": "ok",
+        "img_url": img_url
     }
